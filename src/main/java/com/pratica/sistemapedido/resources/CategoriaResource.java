@@ -12,10 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -37,7 +37,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok().body(categoria);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody @Valid CategoriaDTO categoriaDto) {
 		Categoria categoria = service.fromDto(categoriaDto);
 		categoria = service.insert(categoria);
@@ -46,7 +46,8 @@ public class CategoriaResource {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Void> update(@RequestBody Categoria categoria, @PathVariable Integer id) {
+	public ResponseEntity<Void> update(@RequestBody @Valid CategoriaDTO categoriaDto, @PathVariable Integer id) {
+		Categoria categoria = service.fromDto(categoriaDto);
 		categoria.setId(id);
 		categoria = service.update(categoria);
 		return ResponseEntity.noContent().build();

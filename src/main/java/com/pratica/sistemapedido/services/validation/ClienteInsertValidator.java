@@ -18,7 +18,7 @@ import com.pratica.sistemapedido.services.validation.utils.BR;
 public class ClienteInsertValidator implements ConstraintValidator<ClienteInsert, ClienteNewDTO> {
 	
 	@Autowired
-	ClienteRepository clienteRepository;
+	private ClienteRepository clienteRepository;
 	
 	@Override
 	public void initialize(ClienteInsert ann) {
